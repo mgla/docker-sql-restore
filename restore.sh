@@ -49,4 +49,4 @@ do
 	echo "table: $table"
 	aws s3 cp s3://$S3_BUCKET/$S3_PATH/$table - | gunzip | mysql -u $MYSQL_USER $DB_DATABASE
 done
-
+echo "restore complete"
