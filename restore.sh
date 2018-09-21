@@ -21,7 +21,7 @@ if [[ $LOGLEVEL == "DEBUG" ]]; then
 fi
 
 if [[ $REPLACEDATE == "YES" ]]; then
-	DATE=`date +%Y-%m-%d`
+	DATE=`date +%Y-%m-%d --date=yesterday`
 	S3_PATH=$(echo $S3_PATH | sed "s/%date/$DATE/")
 	echo "date replaced %date in S3_PATH. New value: $S3_PATH"
 fi
