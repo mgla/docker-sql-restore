@@ -20,6 +20,12 @@ if [[ $LOGLEVEL == "DEBUG" ]]; then
 	[ $? -eq 0 ] || exit $?
 fi
 
+if [[ $REPLACEDATE == "YES" ]]; then
+	DATE=`date +%Y-%m-%d`
+	S3_PATH = $(echo $S3_PATH | sed "s/%date/$DATE/")
+	echo "date replaced %date in S3_PATH. New value: $S3_PATH"
+fi
+
 # Iterate all env settings
 for env_key in $(compgen -e); do
 	# If _value_ matches SSM_SECRET, use SSM parameter store
