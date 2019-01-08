@@ -107,6 +107,8 @@ Resources:
         - Name: REPOSITORY_BRANCH
           Value: !Ref GitBranch
         - Name: REPOSITORY_NAME
+          Value: !Sub '${GitSourceRepo}'
+        - Name: REPOSITORY_FULL_NAME
           Value: !Sub '${GitHubUser}/${GitSourceRepo}'
       ServiceRole: !Ref CodeBuildServiceRole
 
