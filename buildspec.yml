@@ -13,7 +13,7 @@ phases:
       - echo Entered the pre_build phase...
       - printenv
       - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
-      - yamllint --strict $(git ls-files '*.yaml' '*.yml')
+      - yamllint --strict $(find . -iname '*.yaml' -or -iname '*.yml')
       - $(aws ecr get-login --no-include-email)
   build:
     commands:
