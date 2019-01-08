@@ -1,0 +1,25 @@
+---
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entered the install phase...
+      - apt-get update -y
+      - apt-get install -y python-pip
+      - pip install yamllint==1.7.0
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase...
+      - printenv
+      - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
+      - yamllint --strict $(git ls-files '*.yaml' '*.yml')
+      - $(aws ecr get-login --no-include-email)
+  build:
+    commands:
+      - echo Entered the build phase...
+      - docker build --tag $REPOSITORY_URI:$TAG .
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI:$TAG
+      - printf '[{"name":"${s3-batch-sql-restore","imageUri":"%s"}]' $REPOSITORY_URI:$TAG
