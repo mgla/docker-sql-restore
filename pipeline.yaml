@@ -106,6 +106,8 @@ Resources:
           Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${EcrDockerRepository}
         - Name: REPOSITORY_BRANCH
           Value: !Ref GitBranch
+        - Name: REPOSITORY_NAME
+          Value: !Sub '${GitHubUser}/${GitSourceRepo}'
       ServiceRole: !Ref CodeBuildServiceRole
 
   CodePipelineArtifactBucket:
@@ -213,7 +215,7 @@ Resources:
   EcrDockerRepository:
     Type: AWS::ECR::Repository
     Properties:
-      RepositoryName: !Sub '${PipelineName}'
+      RepositoryName: !Sub 'github/${GitHubUser}/${GitSourceRepo}'
       LifecyclePolicy:
         LifecyclePolicyText: !Sub
         - |
