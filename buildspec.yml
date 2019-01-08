@@ -24,5 +24,5 @@ phases:
   post_build:
     commands:
       - docker push $REPOSITORY_URI:$TAG
-      - docker push $REPOSITORY_URI:$BRANCH
+      - docker push $REPOSITORY_URI:$REPOSITORY_BRANCH
       - printf '[{"name":"${s3-batch-sql-restore","imageUri":"%s"}]' $REPOSITORY_URI:$BRANCH
