@@ -27,3 +27,4 @@ Should work with arbitrary file sizes, as streaming from S3 is used.
 * The stored S3 artifacts will generate some costs, depending on usage.
 * The created CodePipeline will generate some costs after 30 days, see https://aws.amazon.com/de/codepipeline/pricing/
 * The CodeBuild project will generate some costts, depending on usage, see https://aws.amazon.com/de/codebuild/pricing/
+* The generated Docker images will be stored in an ECR repositories, where additional costs may be generated for storage
