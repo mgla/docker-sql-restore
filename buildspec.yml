@@ -6,7 +6,7 @@ phases:
     commands:
       - echo Entered the install phase...
       - apt-get update -y
-      - apt-get install -y python-pip
+      - apt-get install -y python-pip libpython-dev python-dev
       - pip install yamllint==1.13.0
   pre_build:
     commands:
