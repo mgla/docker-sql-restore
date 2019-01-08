@@ -18,7 +18,7 @@ phases:
   build:
     commands:
       - echo Entered the build phase...
-      - docker build --tag $REPOSITORY_URI:$REPOSITORY_BRANCH
+      - docker build --tag $REPOSITORY_URI:$REPOSITORY_BRANCH .
       - echo Add more tags
       - docker $REPOSITORY_URI:$REPOSITORY_BRANCH $REPOSITORY_URI:$TAG
   post_build:
