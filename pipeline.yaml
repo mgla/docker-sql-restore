@@ -250,7 +250,7 @@ Resources:
                 "description": "Keep only ${MaxTaggedContainerImagesToRetain} tagged images, expire all others",
                 "selection": {
                   "tagStatus": "tagged",
-                  "tagPrefixList": ["master"],
+                  "tagPrefixList": ["${GitBranch}"],
                   "countType": "imageCountMoreThan",
                   "countNumber": ${MaxTaggedContainerImagesToRetain}
                 },
@@ -260,3 +260,4 @@ Resources:
           }
         - DaysToRetainUntaggedContainerImages: !Ref DaysToRetainUntaggedContainerImages
           MaxTaggedContainerImagesToRetain: !Ref MaxTaggedContainerImagesToRetain
+          GitBranch: !Ref GitBranch
