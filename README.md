@@ -13,7 +13,7 @@ Should work with arbitrary file sizes, as streaming from S3 is used.
 
 1. Create a personal access token with GitHub, see https://github.com/settings/tokens and save it for later
    * Needs repo permissions
-1. Create a secret with the AWS Secrets Manager containing the key oauth`. Set the access token as a key.
+1. Create a secret with the AWS Secrets Manager containing the key `oauth`. Set the access token as a key.
    * Note the name of the secret for later use
 1. Create a stack with the pipeline.yaml template with the following parameters
    * GitBranch: The git branch which will trigger the pipeline. Example: master
