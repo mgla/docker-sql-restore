@@ -173,7 +173,7 @@ Resources:
       Name: !Sub '${PipelineName}-Webhook-Github'
       Authentication: GITHUB_HMAC
       AuthenticationConfiguration:
-        SecretToken: !Sub "{{resolve:secretsmanager:${SecretName}:SecretString:secret}}"
+        SecretToken: !Sub "{{resolve:secretsmanager:${SecretName}-generated:SecretString:webhook-secret}}"
       Filters:
       - JsonPath: "$.ref"
         MatchEquals: refs/heads/{Branch}
@@ -181,6 +181,19 @@ Resources:
       TargetAction: Source
       TargetPipelineVersion: !GetAtt CodePipelineGitHub.Version
       RegisterWithThirdParty: 'true'
+
+  GitHubSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: !Sub '${SecretName}-generated'
+      Description: >-
+        This secret has a dynamically generated secret password for the GitHub
+        Webhook
+      GenerateSecretString:
+        SecretStringTemplate: '{}'
+        GenerateStringKey: webhook-secret
+        PasswordLength: 30
+        ExcludeCharacters: '"@/\'
 
   CodePipelineServiceRole:
     Type: AWS::IAM::Role
