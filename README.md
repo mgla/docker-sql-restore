@@ -13,7 +13,7 @@ Should work with arbitrary file sizes, as streaming from S3 is used.
 
 1. Create a personal access token with GitHub, see https://github.com/settings/tokens and save it for later
    * Needs repo permissions
-1. Create a secret with the AWS Secrets Manager containing the keys `secret`and `oauth`. `secret` can be anything - AWS CodePipeline will create the WebHook for you.
+1. Create a secret with the AWS Secrets Manager containing the key oauth`. Set the access token as a key.
    * Note the name of the secret for later use
 1. Create a stack with the pipeline.yaml template with the following parameters
    * GitBranch: The git branch which will trigger the pipeline. Example: master
@@ -23,7 +23,7 @@ Should work with arbitrary file sizes, as streaming from S3 is used.
    * SecretName: The name of the secret you created earlier
 
 ## Costs
-* The AWS secrets manager will generate some money after 30 days, see https://aws.amazon.com/de/secrets-manager/pricing/
+* The AWS secrets manager will generate some costs after 30 days, see https://aws.amazon.com/de/secrets-manager/pricing/
 * The stored S3 artifacts will generate some costs, depending on usage.
 * The created CodePipeline will generate some costs after 30 days, see https://aws.amazon.com/de/codepipeline/pricing/
 * The CodeBuild project will generate some costts, depending on usage, see https://aws.amazon.com/de/codebuild/pricing/
