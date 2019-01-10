@@ -19,7 +19,8 @@ Parameters:
   GitBranch:
     Type: String
     Default: master
-    Description: CodeCommit or GitHub git repository branch - change triggers a new build
+    Description: >-
+      CodeCommit or GitHub git repository branch - change triggers a new build
 
   GitHubUser:
     Type: String
@@ -36,7 +37,8 @@ Parameters:
 
   DaysToRetainUntaggedContainerImages:
     Type: Number
-    Description: The number days to retain untagged container images before expiring
+    Description: >-
+      The number days to retain untagged container images before expiring
     MinValue: 1
     MaxValue: 100
     ConstraintDescription: Value must be between 1 and 100
@@ -83,12 +85,6 @@ Resources:
             - ecr:UploadLayerPart
             - ecr:CompleteLayerUpload
 
-
-  # By default, the build specification is defined in this template, but you can also add buildspec.yml
-  # files in your repos to allow for customization.
-  # See:
-  # https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
-  # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-codebuild-project-source.html
   CodeBuildProject:
     Type: AWS::CodeBuild::Project
     Properties:
@@ -124,9 +120,11 @@ Resources:
       VersioningConfiguration:
         Status: Enabled
 
-  # This CodePipeline is used for GitHub based repos. It triggers on a commit to the Git branch passed,
-  # builds the Docker image and then deploys the container in the Fargate Cluster. CodePipeline can support N stages.
-  # For example, you may want to add a stage to test your build and/or container.
+  # This CodePipeline is used for GitHub based repos. It triggers on a commit
+  # to the Git branch passed builds the Docker image and then deploys the
+  # container in the Fargate Cluster. CodePipeline can support N stages.
+  # For example, you may want to add a stage to test your build and/or
+  # container.
   CodePipelineGitHub:
     Type: AWS::CodePipeline::Pipeline
     Properties:
