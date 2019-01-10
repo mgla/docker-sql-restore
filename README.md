@@ -28,3 +28,8 @@ Should work with arbitrary file sizes, as streaming from S3 is used.
 * The created CodePipeline will generate some costs after 30 days, see https://aws.amazon.com/de/codepipeline/pricing/
 * The CodeBuild project will generate some costts, depending on usage, see https://aws.amazon.com/de/codebuild/pricing/
 * The generated Docker images will be stored in an ECR repositories, where additional costs may be generated for storage
+
+## Docker image expiration
+
+If you change the image tagging, consider that old images will only be expired if they are prefixed with the git branch name.
+For anything else, change the pipeline template.
