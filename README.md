@@ -11,11 +11,13 @@ Should work with arbitrary file sizes, as streaming from S3 is used.
 
 # How to set up a the AWS CodePipeline pipeline
 
+This repository comes with an example pipeline in the file `example_pipeline.yml`.
+
 1. Create a personal access token with GitHub, see https://github.com/settings/tokens and save it for later
    * Needs repo permissions
 1. Create a secret with the AWS Secrets Manager containing the key `oauth`. Set the access token as a key.
    * Note the name of the secret for later use
-1. Create a stack with the pipeline.yaml template with the following parameters
+1. Create a stack with the `example_pipeline.yml` template with the following parameters
    * GitBranch: The git branch which will trigger the pipeline. Example: master
    * GitHubUser: The owner of the repository, i.e. a user name or a organization name
    * GitSourceRepo: The name of the repository without the owner, e.g. s3-batch-sql-restore not mgla/s3-batch-sql-restore
