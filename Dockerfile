@@ -8,6 +8,4 @@ RUN rm -rf /var/cache/yum
 
 COPY src /app/
 
-USER root
-
 ENTRYPOINT ["/app/restore.sh"]
