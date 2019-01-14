@@ -13,11 +13,11 @@ phases:
       - echo Entered the pre_build phase...
       - printenv
       - TAG="$REPOSITORY_BRANCH.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
-      - yamllint --strict $(find . -iname '*.yaml' -or -iname '*.yml')
       - $(aws ecr get-login --no-include-email)
   build:
     commands:
       - echo Entered the build phase...
+      - yamllint --strict $(find . -iname '*.yaml' -or -iname '*.yml')
       - docker build --tag $REPOSITORY_URI:$REPOSITORY_BRANCH .
       - echo Add more tags
       - docker tag $REPOSITORY_URI:$REPOSITORY_BRANCH $REPOSITORY_URI:$TAG
